@@ -17,7 +17,7 @@
 
   // Sticky CTA：滾過首屏 60% 出現
   const sticky = document.querySelector('.sticky-cta');
-  const hero = document.querySelector('.hero');
+  const hero = document.querySelector('.hero-photo-img');
   if (sticky && hero) {
     const onScroll = () => {
       const threshold = hero.offsetHeight * 0.6;
