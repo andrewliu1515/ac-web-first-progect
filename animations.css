@@ -1,0 +1,28 @@
+/* 進場動畫（IntersectionObserver 會加 .is-in） */
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .36s cubic-bezier(.22,.61,.36,1),transform .36s cubic-bezier(.22,.61,.36,1)}
+.reveal.is-in{opacity:1;transform:none}
+
+/* 滾動帶 */
+.rolling{overflow:hidden;margin-top:.5rem;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.rolling .track{display:flex;gap:12px;will-change:transform}
+.shot{min-width:320px;max-width:420px;flex:0 0 auto}
+.shot img{width:100%;height:240px;object-fit:cover;border-radius:14px;border:1px solid var(--border);box-shadow:var(--shadow);transition:transform .2s ease}
+.shot img:hover{transform:scale(1.02)}
+.shot figcaption{color:#d8e6ff;font-size:.9rem;margin-top:.35rem}
+@keyframes roll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;z-index:100}
+.lightbox.open{display:flex}
+.lb-img{max-width:90vw;max-height:80vh;border-radius:10px}
+.lb-cap{color:#fff;margin-top:.5rem;text-align:center}
+.lb-close,.lb-prev,.lb-next{position:absolute;background:rgba(0,0,0,.5);color:#fff;border:1px solid #fff;border-radius:8px;padding:.4rem .6rem;cursor:pointer}
+.lb-close{top:18px;right:18px}
+.lb-prev{left:18px;top:50%;transform:translateY(-50%)}
+.lb-next{right:18px;top:50%;transform:translateY(-50%)}
+
+/* 減少動態偏好 */
+@media (prefers-reduced-motion: reduce){
+  .rolling .track{animation:none}
+  .reveal{transition:none}
+}
