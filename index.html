@@ -142,57 +142,60 @@
       </div>
     </section>
 
-    <!-- 施工實景 Rolling Gallery -->
-    <section aria-labelledby="gallery">
-      <div class="container">
-        <h2 id="gallery" class="reveal">施工實景 Rolling Gallery</h2>
-        <p class="meta reveal">實地紀錄：安裝、清洗前後對比與工具整備。</p>
+    <!-- 施工實景：可拖曳 Gallery -->
+<section aria-labelledby="gallery">
+  <div class="container">
+    <h2 id="gallery" class="reveal">施工實景 Gallery（可左右滑動）</h2>
+    <p class="meta reveal">實地紀錄：安裝、清洗前後對比與工具整備。滑動或拖曳瀏覽，點圖可放大。</p>
 
-        <div class="rolling" data-speed="32">
-          <div class="track">
-            <figure class="shot">
-              <img src="assets/img/gallery/hsinchu-east-ac-install-202507-01.jpg"
-                   alt="新竹東區 分離式冷氣窗洞施工定位 2025-07" loading="lazy" width="640" height="360"/>
-              <figcaption>新竹東區｜冷氣安裝定位</figcaption>
-            </figure>
-            <figure class="shot">
-              <img src="assets/img/gallery/zhubei-ac-clean-before-202506-01.jpg"
-                   alt="竹北 分離式室內機清洗前 狀態紀錄" loading="lazy"/>
-              <figcaption>竹北｜室內機清洗前</figcaption>
-            </figure>
-            <figure class="shot">
-              <img src="assets/img/gallery/zhubei-ac-clean-after-202506-01.jpg"
-                   alt="竹北 分離式室內機清洗後 葉片去污" loading="lazy"/>
-              <figcaption>竹北｜室內機清洗後</figcaption>
-            </figure>
-            <figure class="shot">
-              <img src="assets/img/gallery/hsinchu-tools-setup-202506-01.jpg"
-                   alt="新竹 工具與材料整備 梯子 抽真空設備" loading="lazy"/>
-              <figcaption>新竹｜工具與材料整備</figcaption>
-            </figure>
+    <div class="gallery" data-snap="true" aria-label="施工實景相簿">
+      <button class="g-nav prev" aria-label="上一張">‹</button>
+      <div class="track" tabindex="0">
+        <!-- 12 張；先放你提供的 4 張，其餘 8 張可先用佔位，之後覆蓋檔案即可 -->
+        <figure class="shot">
+          <img src="assets/img/gallery/hsinchu-east-ac-install-202507-01.jpg"
+               alt="新竹東區 分離式冷氣窗洞施工定位 2025-07" loading="lazy" width="640" height="360">
+          <figcaption>新竹東區｜冷氣安裝定位</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/img/gallery/zhubei-ac-clean-before-202506-01.jpg"
+               alt="竹北 分離式室內機清洗前 狀態紀錄" loading="lazy">
+          <figcaption>竹北｜室內機清洗前</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/img/gallery/zhubei-ac-clean-after-202506-01.jpg"
+               alt="竹北 分離式室內機清洗後 葉片去污" loading="lazy">
+          <figcaption>竹北｜室內機清洗後</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/img/gallery/hsinchu-tools-setup-202506-01.jpg"
+               alt="新竹 工具與材料整備 梯子 抽真空設備" loading="lazy">
+          <figcaption>新竹｜工具與材料整備</figcaption>
+        </figure>
 
-            <!-- 其餘 8 張佔位，之後覆蓋即可 -->
-            <figure class="shot"><img src="assets/img/gallery/placeholder-01.jpg" alt="案例照片" loading="lazy"/><figcaption>案例照片</figcaption></figure>
-            <figure class="shot"><img src="assets/img/gallery/placeholder-02.jpg" alt="案例照片" loading="lazy"/><figcaption>案例照片</figcaption></figure>
-            <figure class="shot"><img src="assets/img/gallery/placeholder-03.jpg" alt="案例照片" loading="lazy"/><figcaption>案例照片</figcaption></figure>
-            <figure class="shot"><img src="assets/img/gallery/placeholder-04.jpg" alt="案例照片" loading="lazy"/><figcaption>案例照片</figcaption></figure>
-            <figure class="shot"><img src="assets/img/gallery/placeholder-05.jpg" alt="案例照片" loading="lazy"/><figcaption>案例照片</figcaption></figure>
-            <figure class="shot"><img src="assets/img/gallery/placeholder-06.jpg" alt="案例照片" loading="lazy"/><figcaption>案例照片</figcaption></figure>
-            <figure class="shot"><img src="assets/img/gallery/placeholder-07.jpg" alt="案例照片" loading="lazy"/><figcaption>案例照片</figcaption></figure>
-            <figure class="shot"><img src="assets/img/gallery/placeholder-08.jpg" alt="案例照片" loading="lazy"/><figcaption>案例照片</figcaption></figure>
-          </div>
-        </div>
-
-        <!-- Lightbox -->
-        <div class="lightbox" aria-hidden="true" role="dialog" aria-label="圖片預覽">
-          <button class="lb-close" aria-label="關閉">×</button>
-          <button class="lb-prev" aria-label="上一張">‹</button>
-          <img class="lb-img" alt="">
-          <div class="lb-cap"></div>
-          <button class="lb-next" aria-label="下一張">›</button>
-        </div>
+        <!-- 其餘 8 張，可直接以相同命名規則覆蓋 -->
+        <figure class="shot"><img src="assets/img/gallery/placeholder-01.jpg" alt="案例照片" loading="lazy"><figcaption>案例照片</figcaption></figure>
+        <figure class="shot"><img src="assets/img/gallery/placeholder-02.jpg" alt="案例照片" loading="lazy"><figcaption>案例照片</figcaption></figure>
+        <figure class="shot"><img src="assets/img/gallery/placeholder-03.jpg" alt="案例照片" loading="lazy"><figcaption>案例照片</figcaption></figure>
+        <figure class="shot"><img src="assets/img/gallery/placeholder-04.jpg" alt="案例照片" loading="lazy"><figcaption>案例照片</figcaption></figure>
+        <figure class="shot"><img src="assets/img/gallery/placeholder-05.jpg" alt="案例照片" loading="lazy"><figcaption>案例照片</figcaption></figure>
+        <figure class="shot"><img src="assets/img/gallery/placeholder-06.jpg" alt="案例照片" loading="lazy"><figcaption>案例照片</figcaption></figure>
+        <figure class="shot"><img src="assets/img/gallery/placeholder-07.jpg" alt="案例照片" loading="lazy"><figcaption>案例照片</figcaption></figure>
+        <figure class="shot"><img src="assets/img/gallery/placeholder-08.jpg" alt="案例照片" loading="lazy"><figcaption>案例照片</figcaption></figure>
       </div>
-    </section>
+      <button class="g-nav next" aria-label="下一張">›</button>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" aria-hidden="true" role="dialog" aria-label="圖片預覽">
+      <button class="lb-close" aria-label="關閉">×</button>
+      <button class="lb-prev" aria-label="上一張">‹</button>
+      <img class="lb-img" alt="">
+      <div class="lb-cap"></div>
+      <button class="lb-next" aria-label="下一張">›</button>
+    </div>
+  </div>
+</section>
 
    <!-- 如何諮詢與預約（四步 Stepper｜修正版） -->
 <section aria-labelledby="howto">

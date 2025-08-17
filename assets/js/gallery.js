@@ -1,23 +1,84 @@
-// 滾動帶初始化 + 輕量 Lightbox
+// 可拖曳橫向 Gallery + 慣性 + Lightbox
 (function(){
-  const rolling = document.querySelector('.rolling');
-  if (!rolling) return;
-  const track = rolling.querySelector('.track');
-  const speed = parseInt(rolling.dataset.speed || '32', 10); // 秒
+  const root = document.querySelector('.gallery');
+  if (!root) return;
 
-  // 複製一輪做無縫循環
-  track.innerHTML += track.innerHTML;
-  track.style.animation = `roll ${speed}s linear infinite`;
+  const track = root.querySelector('.track');
+  const prevBtn = root.querySelector('.g-nav.prev');
+  const nextBtn = root.querySelector('.g-nav.next');
 
-  // 觸控暫停/恢復（滑鼠用 :hover）
-  ['touchstart','pointerdown'].forEach(evt=>{
-    rolling.addEventListener(evt, ()=> track.style.animationPlayState='paused');
+  // 1) 拖曳/滑動 + 慣性
+  let isDown = false, startX = 0, startScroll = 0, vx = 0, raf;
+  const maxVel = 120; // 惯性速度上限
+
+  const onDown = (e) => {
+    isDown = true;
+    startX = (e.touches ? e.touches[0].clientX : e.clientX);
+    startScroll = track.scrollLeft;
+    vx = 0;
+    cancelAnimationFrame(raf);
+  };
+  const onMove = (e) => {
+    if (!isDown) return;
+    const x = (e.touches ? e.touches[0].clientX : e.clientX);
+    const dx = x - startX;
+    track.scrollLeft = startScroll - dx;
+    vx = -(dx); // 粗略速度
+  };
+  const onUp = () => {
+    if (!isDown) return;
+    isDown = false;
+    // 惯性
+    let v = Math.max(Math.min(vx, maxVel), -maxVel);
+    const friction = 0.92;
+    const step = () => {
+      if (Math.abs(v) < 0.5) return;
+      track.scrollLeft += -v;
+      v *= friction;
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+  };
+
+  track.addEventListener('mousedown', onDown);
+  track.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup', onUp);
+  track.addEventListener('touchstart', onDown, {passive:true});
+  track.addEventListener('touchmove', onMove, {passive:true});
+  track.addEventListener('touchend', onUp);
+
+  // 2) 滑鼠滾輪 → 橫向
+  const onWheel = (e) => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      track.scrollLeft += e.deltaY;
+      e.preventDefault();
+    }
+  };
+  track.addEventListener('wheel', onWheel, {passive:false});
+
+  // 3) 鍵盤左右鍵導覽
+  track.addEventListener('keydown', (e)=>{
+    if (e.key === 'ArrowRight') track.scrollLeft += track.clientWidth * 0.9;
+    if (e.key === 'ArrowLeft') track.scrollLeft -= track.clientWidth * 0.9;
   });
-  ['touchend','pointerup','pointercancel','mouseleave'].forEach(evt=>{
-    rolling.addEventListener(evt, ()=> track.style.animationPlayState='running');
-  });
 
-  // Lightbox
+  // 4) 上一張/下一張按鈕（以 scroll-snap 為目標）
+  const scrollByOne = (dir) => {
+    const cards = Array.from(track.querySelectorAll('.shot'));
+    const x = track.scrollLeft + (dir > 0 ? track.clientWidth*0.55 : -track.clientWidth*0.55);
+    // 找到最接近 x 的卡片
+    let best = track.scrollLeft, min = Infinity;
+    for (const el of cards){
+      const left = el.offsetLeft - 6; // 與 padding 對齊
+      const diff = Math.abs(left - x);
+      if (diff < min){ min = diff; best = left; }
+    }
+    track.scrollTo({left: best, behavior:'smooth'});
+  };
+  prevBtn.addEventListener('click', ()=> scrollByOne(-1));
+  nextBtn.addEventListener('click', ()=> scrollByOne(1));
+
+  // 5) Lightbox（與前版相同，但無 WebGL，因此無文字扭曲）
   const lb = document.querySelector('.lightbox');
   const lbImg = lb.querySelector('.lb-img');
   const lbCap = lb.querySelector('.lb-cap');
