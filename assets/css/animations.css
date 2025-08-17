@@ -19,7 +19,7 @@
 .shot img:hover{transform:scale(1.02)}
 .shot figcaption{color:#d8e6ff;font-size:.9rem;margin-top:.35rem;text-align:center}
 
-/* 導航箭頭 */
+/* Gallery 導航箭頭 */
 .g-nav{
   position:absolute; top:50%; transform:translateY(-50%);
   width:40px; height:40px; border-radius:50%;
@@ -30,15 +30,26 @@
 .g-nav.prev{left:4px}
 .g-nav.next{right:4px}
 
-/* Lightbox */
-.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;z-index:100}
+/* Lightbox：直向排版，caption 置下方 */
+.lightbox{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.86);
+  display:none; flex-direction:column; align-items:center; justify-content:center;
+  padding:16px; z-index:100;
+}
 .lightbox.open{display:flex}
-.lb-img{max-width:90vw;max-height:80vh;border-radius:10px}
-.lb-cap{color:#fff;margin-top:.5rem;text-align:center}
-.lb-close,.lb-prev,.lb-next{position:absolute;background:rgba(0,0,0,.5);color:#fff;border:1px solid #fff;border-radius:8px;padding:.4rem .6rem;cursor:pointer}
-.lb-close{top:18px;right:18px}
-.lb-prev{left:18px;top:50%;transform:translateY(-50%)}
-.lb-next{right:18px;top:50%;transform:translateY(-50%)}
+.lb-img{max-width:92vw; max-height:72vh; border-radius:12px}
+.lb-cap{
+  max-width:92vw; margin-top:.6rem; color:#fff; text-align:center;
+  line-height:1.5; word-break:break-word;
+}
+.lb-close,.lb-prev,.lb-next{
+  position:absolute; background:rgba(0,0,0,.5); color:#fff;
+  border:1px solid #ffffff66; border-radius:10px; padding:.45rem .6rem; cursor:pointer
+}
+.lb-close{top:18px; right:18px}
+.lb-prev{left:14px; top:50%; transform:translateY(-50%)}
+.lb-next{right:14px; top:50%; transform:translateY(-50%)}
 
 /* 減少動態偏好 */
 @media (prefers-reduced-motion: reduce){

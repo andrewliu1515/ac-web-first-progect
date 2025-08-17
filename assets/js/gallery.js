@@ -7,9 +7,9 @@
   const prevBtn = root.querySelector('.g-nav.prev');
   const nextBtn = root.querySelector('.g-nav.next');
 
-  // 1) 拖曳/滑動 + 慣性
+  // 拖曳/滑動 + 慣性
   let isDown = false, startX = 0, startScroll = 0, vx = 0, raf;
-  const maxVel = 120; // 惯性速度上限
+  const maxVel = 120;
 
   const onDown = (e) => {
     isDown = true;
@@ -23,12 +23,11 @@
     const x = (e.touches ? e.touches[0].clientX : e.clientX);
     const dx = x - startX;
     track.scrollLeft = startScroll - dx;
-    vx = -(dx); // 粗略速度
+    vx = -(dx);
   };
   const onUp = () => {
     if (!isDown) return;
     isDown = false;
-    // 惯性
     let v = Math.max(Math.min(vx, maxVel), -maxVel);
     const friction = 0.92;
     const step = () => {
@@ -47,7 +46,7 @@
   track.addEventListener('touchmove', onMove, {passive:true});
   track.addEventListener('touchend', onUp);
 
-  // 2) 滑鼠滾輪 → 橫向
+  // 滑輪 → 橫向
   const onWheel = (e) => {
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
       track.scrollLeft += e.deltaY;
@@ -56,20 +55,19 @@
   };
   track.addEventListener('wheel', onWheel, {passive:false});
 
-  // 3) 鍵盤左右鍵導覽
+  // 鍵盤左右鍵
   track.addEventListener('keydown', (e)=>{
     if (e.key === 'ArrowRight') track.scrollLeft += track.clientWidth * 0.9;
     if (e.key === 'ArrowLeft') track.scrollLeft -= track.clientWidth * 0.9;
   });
 
-  // 4) 上一張/下一張按鈕（以 scroll-snap 為目標）
+  // 上/下一張（對齊 scroll-snap）
   const scrollByOne = (dir) => {
     const cards = Array.from(track.querySelectorAll('.shot'));
     const x = track.scrollLeft + (dir > 0 ? track.clientWidth*0.55 : -track.clientWidth*0.55);
-    // 找到最接近 x 的卡片
     let best = track.scrollLeft, min = Infinity;
     for (const el of cards){
-      const left = el.offsetLeft - 6; // 與 padding 對齊
+      const left = el.offsetLeft - 6;
       const diff = Math.abs(left - x);
       if (diff < min){ min = diff; best = left; }
     }
@@ -78,7 +76,7 @@
   prevBtn.addEventListener('click', ()=> scrollByOne(-1));
   nextBtn.addEventListener('click', ()=> scrollByOne(1));
 
-  // 5) Lightbox（與前版相同，但無 WebGL，因此無文字扭曲）
+  // Lightbox
   const lb = document.querySelector('.lightbox');
   const lbImg = lb.querySelector('.lb-img');
   const lbCap = lb.querySelector('.lb-cap');
