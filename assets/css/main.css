@@ -1,0 +1,148 @@
+:root{
+  /* B3｜鈷藍 × 奶油黃 */
+  --brand:#0c3ea4;
+  --brand-d:#0a2f7a;
+  --soft:#114abf;
+  --accent:#ffd45a;
+  --paper:#ffffff;
+  --ink:#0f1420;
+  --ink-on:#f7fbff;
+  --muted:#cddbf7;
+  --border:#1a53c9;
+  --radius:14px;
+  --shadow:0 16px 40px rgba(0,0,0,.18);
+  --max:1120px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Noto Sans TC","Microsoft JhengHei","Heiti TC",Roboto,Arial,sans-serif;background:var(--brand);color:var(--ink-on)}
+img{max-width:100%;display:block}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--max);margin:0 auto;padding:0 20px}
+
+/* Buttons */
+.btn{display:inline-flex;gap:.5rem;align-items:center;justify-content:center;padding:.9rem 1.1rem;border-radius:12px;border:2px solid transparent;font-weight:700;letter-spacing:.02em;transition:.2s ease;white-space:nowrap}
+.btn.primary{background:var(--accent);color:#1f2937}
+.btn.primary:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.btn.ghost{border-color:#6ea4ff;color:#e5edff;background:rgba(255,255,255,.06)}
+.btn.ghost:hover{background:rgba(255,255,255,.12)}
+
+/* Hero */
+.hero{padding:28px 0 20px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,var(--brand) 0%, var(--soft) 100%)}
+.hero-grid{display:grid;gap:24px;grid-template-columns:1fr .9fr;align-items:center}
+.brandline{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.brandline img{width:64px;height:64px;border-radius:12px;background:#fef08a;object-fit:cover;box-shadow:0 8px 18px rgba(0,0,0,.25)}
+h1{margin:.25rem 0 .75rem;font-size:clamp(28px,3vw,42px);line-height:1.2;color:#fff;letter-spacing:.02em}
+.lead{color:#e6efff;line-height:1.7;font-size:clamp(16px,1.6vw,18px)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
+.chip{padding:.3rem .6rem;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid #8ab0ff;color:#eef5ff;font-size:.92rem}
+.panel{background:linear-gradient(180deg,#0d46b9,#0a2f7a);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+.panel h3{margin:.25rem 0 .5rem;color:#fff}
+
+/* Layout */
+section{padding:44px 0;border-bottom:1px solid var(--border)}
+h2{font-size:clamp(22px,2.2vw,28px);margin:0 0 18px;color:#fff}
+p{margin:.4rem 0 1rem}
+.grid{display:grid;gap:18px}
+.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+/* Cards and blocks */
+.card{background:#0c44bf;border:1px solid var(--border);border-radius:16px;padding:18px;color:#e6efff;box-shadow:var(--shadow)}
+.card h3{margin:.25rem 0 .5rem;color:#fff}
+.meta{color:#d8e6ff}
+.list{margin:.5rem 0 0;padding-left:1.1rem}
+.list li{margin:.35rem 0}
+.contact-icons{display:flex;flex-direction:column;gap:10px}
+.contact-icons a{display:flex;align-items:center;gap:10px;color:#e6efff}
+.qr{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center}
+.qr .box{width:120px;height:120px;border:2px dashed #bcd0ff;border-radius:12px;display:grid;place-items:center;color:#e7efff;font-size:12px}
+
+/* 保養理由 */
+.reason{display:flex;gap:12px;align-items:flex-start;background:#0a2f7a;border:1px solid var(--border);border-left:6px solid var(--accent);border-radius:12px;padding:14px}
+.reason-icon{flex:0 0 36px;height:36px;border-radius:8px;background:var(--accent);display:grid;place-items:center;color:#1f2937;font-weight:900}
+
+/* 服務承諾徽章 */
+.badges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:10px}
+.badge{background:#0a2f7a;border:1px solid var(--border);border-radius:16px;padding:16px;display:grid;gap:6px;justify-items:center;color:#eef5ff;box-shadow:var(--shadow)}
+.badge strong{color:var(--accent);font-size:1.6rem;line-height:1}
+.badge span{color:#d8e6ff}
+
+/* Stepper — 使用自訂圓形編號，關閉 <ol> 內建數字 */
+.stepper{
+  list-style: none;                 /* 關閉原生 1. 2. 3. */
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 14px;
+  counter-reset: step;              /* 啟用自訂計數 */
+}
+.stepper > li{
+  position: relative;
+  background:#0a2f7a;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px 16px 16px 16px;      /* 頂部多留空，避免與圓形重疊 */
+  color:#eef5ff;
+}
+.stepper > li h3{
+  margin:.1rem 0 .4rem;
+  font-weight:800;
+  color:#fff;
+}
+.stepper > li::before{
+  counter-increment: step;
+  content: counter(step);
+  position:absolute;
+  left:12px;                        /* 與卡片對齊 */
+  top:-18px;                        /* 半懸掛在卡片上緣 */
+  width:34px;height:34px;
+  display:grid;place-items:center;
+  background:var(--accent);
+  color:#1f2937;
+  border-radius:50%;
+  font-weight:800;
+  border:2px solid #0002;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);
+}
+/* 某些瀏覽器會保留 ::marker，小心清掉 */
+.stepper > li::marker{content:''}
+
+/* 強調與連結底線不互相干擾 */
+.stepper a{ text-decoration: underline; text-underline-offset: 2px; }
+.highlight{
+  background: linear-gradient(transparent 60%, rgba(255,212,90,.55) 0);
+  text-decoration: none;
+}
+
+/* RWD */
+@media (max-width: 960px){ .stepper{grid-template-columns:1fr 1fr} }
+@media (max-width: 640px){ .stepper{grid-template-columns:1fr} }
+
+
+/* 地圖 */
+.map-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+.map-embed{margin-top:12px;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.map-embed iframe{width:100%;height:360px;border:0}
+
+/* Sticky CTA */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;background:#0a2b6df0;border-top:1px solid var(--border);backdrop-filter:saturate(150%) blur(6px);padding:.6rem .9rem;display:flex;gap:.6rem;justify-content:center;z-index:50;transform:translateY(120%);transition:transform .28s ease}
+
+/* Footer */
+.footer{background:#0a2f7a;color:#c8d1dc;padding:28px 0}
+.footer a{color:#ffd45a}
+
+/* RWD */
+@media (max-width: 960px){
+  .hero-grid{grid-template-columns:1fr}
+  .cols-3{grid-template-columns:1fr 1fr}
+  .qr{grid-template-columns:100px 1fr}
+  .badges{grid-template-columns:1fr 1fr}
+  .stepper{grid-template-columns:1fr 1fr}
+}
+@media (max-width: 640px){
+  .cols-3,.cols-2{grid-template-columns:1fr}
+  .badges,.stepper{grid-template-columns:1fr}
+}
